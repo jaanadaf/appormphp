@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User
@@ -21,6 +23,16 @@ class User
 
     #[ORM\Column(length: 255)]
     private ?string $password = null;
+
+    // Ajout de la relation OneToMany avec Product
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Product::class)]
+    private Collection $products;
+
+    public function __construct()
+    {
+        // Initialiser la collection de produits
+        $this->products = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -61,5 +73,12 @@ class User
         $this->password = $password;
 
         return $this;
+    }
+
+    // Méthodes pour accéder à la collection de produits
+
+    public function getProducts(): Collection
+    {
+        return $this->products;
     }
 }

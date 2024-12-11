@@ -1,9 +1,9 @@
 <?php
-
+// src/Entity/Product.php
 namespace App\Entity;
 
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\User; // Importer la classe User
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
@@ -11,8 +11,8 @@ use Doctrine\ORM\Mapping as ORM;
 class Product
 {
     /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -37,7 +37,14 @@ class Product
      */
     private $stock;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="products")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
     // Getters et setters
+
     public function getId(): ?int
     {
         return $this->id;
@@ -84,6 +91,19 @@ class Product
     public function setStock(int $stock): self
     {
         $this->stock = $stock;
+        return $this;
+    }
+
+    // Méthodes pour la relation ManyToOne avec User
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
         return $this;
     }
 }
