@@ -1,0 +1,8 @@
+<!-- templates/security/login.html.twig -->
+<h1>Connexion</h1>
+
+<form action="{{ path('app_login') }}" method="post">
+    <input type="text" name="_username" placeholder="Email" required />
+    <input type="password" name="_password" placeholder="Mot de passe" required />
+    <button type="submit">Se connecter</button>
+</form>

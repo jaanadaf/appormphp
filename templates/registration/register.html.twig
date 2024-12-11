@@ -1,14 +1,15 @@
-{# templates/registration/register.html.twig #}
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Page d'inscription</title>
-</head>
-<body>
-    <h1>Inscrivez-vous ici</h1>
-    <form>
-        <!-- Formulaire d'inscription -->
-    </form>
-</body>
-</html>
+{% extends 'base.html.twig' %}
+
+{% block title %}S'inscrire{% endblock %}
+
+{% block body %}
+    <h1>Inscription</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.username) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.password) }}
+        {{ form_row(form.submit) }}
+    {{ form_end(form) }}
+{% endblock %}
 
